@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Login from "./components/login";
+import Quiz from "./components/Quiz";
+import Result from "./components/Result";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container mt-5">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <Link className="navbar-brand" to="/">
+          Quiz App
+        </Link>
+        <div className="ml-auto">
+          <Link className="btn btn-outline-primary" to="/login">
+            Login
+          </Link>
+        </div>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/result" element={<Result />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+function Home() {
+  return (
+    <div className="text-center">
+      <h1>Welcome to the Quiz App</h1>
+      <p>This is a simple quiz app built with React, React Router, and Bootstrap.</p>
+      <Link to="/quiz" className="btn btn-primary">
+        Start Quiz
+      </Link>
+    </div>
+  );
+}
+
+export default App;
